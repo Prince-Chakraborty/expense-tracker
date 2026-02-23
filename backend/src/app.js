@@ -10,6 +10,8 @@ const importRoutes = require('./routes/import.routes');
 const { initWebSocket } = require('./services/websocket.service');
 const { setupSwagger } = require('./config/swagger');
 const { errorHandler, notFound } = require('./middleware/error.middleware');
+const fs = require('fs');
+if (!fs.existsSync('./uploads')) fs.mkdirSync('./uploads', { recursive: true });
 const recurringRoutes = require('./routes/recurring.routes');
 const { processRecurring } = require('./controllers/recurring.controller');
 const exportRoutes = require('./routes/export.routes');
