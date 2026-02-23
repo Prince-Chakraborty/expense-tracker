@@ -1,0 +1,64 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin123
+          POSTGRES_DB: expense_tracker
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: cd backend && npm install
+
+      - name: Run tests
+        run: cd backend && npm test
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: expense_tracker
+          DB_USER: admin
+          DB_PASSWORD: admin123
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          JWT_ACCESS_SECRET: test_secret
+          JWT_REFRESH_SECRET: test_refresh_secret
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t expense-tracker-backend ./backend
+
+      - name: Deploy to AWS
+        run: echo "Deploy to AWS ECS here"
