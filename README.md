@@ -197,6 +197,18 @@ RESTful API, MVC Architecture, Node.js, Express.js, PostgreSQL, Redis, JWT Authe
 
 ---
 
+
+---
+
+## 🔮 Future Enhancements
+
+- 🤖 AI-powered expense categorization using GPT
+- 🏦 Bank API integration (Plaid API)
+- 📱 Mobile app (React Native)
+- 💹 Investment tracking
+- 🌍 Multi-currency support
+- 📧 Email notifications for budget alerts
+
 ## 🤝 Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
