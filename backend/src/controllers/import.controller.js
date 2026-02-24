@@ -1,4 +1,4 @@
-const { importFromCSVBuffer, importFromCSV, importFromPDF } = require('../services/import.service');
+const { importFromCSV, importFromPDF } = require('../services/import.service');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -9,10 +9,8 @@ const importExpenses = async (req, res) => {
       return res.status(400).json({ message: 'No file uploaded' });
     }
     const ext = path.extname(req.file.originalname).toLowerCase();
-    
     const tmpPath = path.join(os.tmpdir(), Date.now() + ext);
     fs.writeFileSync(tmpPath, req.file.buffer);
-    
     let result;
     if (ext === '.csv') {
       result = await importFromCSV(tmpPath, req.user.id);
@@ -21,11 +19,8 @@ const importExpenses = async (req, res) => {
     } else {
       return res.status(400).json({ message: 'Only CSV and PDF files are supported' });
     }
-    
-    if (fs.existsSync(tmpPath)) fs.unlinkSync(tmpPath);
-    
     return res.status(200).json({
-      message: `Successfully imported ${result.imported} expenses`,
+      message: 'Successfully imported ' + result.imported + ' expenses',
       imported: result.imported,
     });
   } catch (error) {

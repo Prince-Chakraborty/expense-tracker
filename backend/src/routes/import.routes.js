@@ -5,17 +5,8 @@ const path = require('path');
 const { protect } = require('../middleware/auth.middleware');
 const { importExpenses } = require('../controllers/import.controller');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
 const upload = multer({
-  storage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedTypes = /csv|pdf/;
@@ -26,5 +17,4 @@ const upload = multer({
 });
 
 router.post('/', protect, upload.single('file'), importExpenses);
-
 module.exports = router;
