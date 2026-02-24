@@ -32,7 +32,7 @@ const importFromCSV = async (filePath, userId) => {
       .on('end', async () => {
         try {
           await Expense.bulkCreate(expenses);
-          fs.unlinkSync(filePath);
+          try { fs.unlinkSync(filePath); } catch(e) {}
           resolve({ imported: expenses.length });
         } catch (error) {
           reject(error);
