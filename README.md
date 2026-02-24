@@ -225,4 +225,4 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 **Prince Chakraborty**
 - GitHub: [@Prince-Chakraborty](https://github.com/Prince-Chakraborty)
-- LinkedIn: [Prince Chakraborty](https://linkedin.com/in/prince-chakraborty)
+- LinkedIn: [Prince Chakraborty](https://www.linkedin.com/in/prince-chakraborty-1287312b0/)
