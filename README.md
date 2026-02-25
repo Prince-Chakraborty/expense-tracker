@@ -33,6 +33,19 @@
 
 Managing personal finances is painful. People lose track of spending, miss budget limits, and waste hours manually categorizing expenses. ExpenseAI solves this with AI-powered receipt scanning, automatic categorization, real-time budget alerts, intelligent anomaly detection, and recurring expense automation.
 
+
+---
+
+## 📸 Screenshots
+
+| Dashboard | Add Expense | Budget |
+|:---------:|:-----------:|:------:|
+| ![Dashboard](./screenshots/dashboard.png) | ![Add Expense](./screenshots/add-expense.png) | ![Budget](./screenshots/budget%20tracker.png) |
+
+| Login | Expenses | Recurring |
+|:-----:|:--------:|:---------:|
+| ![Login](./screenshots/login.png) | ![Expenses](./screenshots/all%20expenses.png) | ![Recurring](./screenshots/recurring%20expenses.png) |
+
 ---
 
 ## 🏗️ Architecture
