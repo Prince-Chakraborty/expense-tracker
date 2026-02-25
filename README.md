@@ -1,4 +1,12 @@
-# ExpenseAI - Advanced Expense Tracker
+# 🚀 ExpenseAI - Advanced Expense Tracker
+
+<div align="center">
+  <br />
+  <a href="https://expense-tracker-two-kappa-56.vercel.app">🔗 Live Demo</a> • 
+  <a href="https://expense-tracker-7n2z.onrender.com/api-docs">📖 API Docs</a> •
+  <a href="https://github.com/Prince-Chakraborty/expense-tracker">💻 GitHub</a>
+  <br /><br />
+</div>
 
 > Production-grade AI-powered expense tracking application built with Next.js, Node.js, PostgreSQL, and Redis.
 
@@ -199,6 +207,19 @@ RESTful API, MVC Architecture, Node.js, Express.js, PostgreSQL, Redis, JWT Authe
 
 
 ---
+
+
+---
+
+## 🧠 Challenges Overcome
+
+- **IPv4/IPv6 Database Connection:** Solved Supabase IPv6 incompatibility with Render by switching to Session Pooler
+- **File Upload on Serverless:** Fixed multer disk storage failure on Render by switching to memory storage + OS temp directory
+- **Redis URL vs Host/Port:** Migrated from host/port config to URL-based connection for Upstash cloud Redis
+- **TypeScript Strict Mode:** Resolved 15+ TypeScript errors in Next.js production build
+- **CORS in Production:** Configured dynamic CORS origins for Vercel frontend + Render backend
+- **JWT Refresh Token Rotation:** Implemented secure token rotation to prevent replay attacks
+- **React State Closure Bug:** Fixed inline onClick handlers to capture state values at click time
 
 ## 🔮 Future Enhancements
 
