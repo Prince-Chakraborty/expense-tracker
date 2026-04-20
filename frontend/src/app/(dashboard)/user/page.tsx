@@ -118,16 +118,18 @@ export default function UserDashboard() {
     const lv = parseFloat(budgetLimit);
     const mv = budgetMonth;
     const cv = budgetCategory;
-    if (!lv) return;
+    if (!lv) { setMessage('Please enter a monthly limit'); return; }
     fetch('https://expense-tracker-7n2z.onrender.com/api/budgets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
       body: JSON.stringify({ category: cv, monthlyLimit: lv, month: mv }),
     }).then(r => r.json()).then(() => {
       setBudgetLimit('');
+      setMessage('✅ Budget set successfully!');
+      setTimeout(() => setMessage(''), 3000);
       fetch('https://expense-tracker-7n2z.onrender.com/api/budgets?month=' + mv, { headers: { Authorization: 'Bearer ' + getToken() } })
         .then(r => r.json()).then(d => setBudgets(d.budgets || []));
-    });
+    }).catch(() => setMessage('❌ Failed to set budget'));
   };
 
   const handleDeleteBudget = (id: string) => {
@@ -136,15 +138,17 @@ export default function UserDashboard() {
   };
 
   const handleAddRecurring = () => {
-    if (!recTitle || !recAmount || !recNextDate) return;
+    if (!recTitle || !recAmount || !recNextDate) { setMessage('Please fill all required fields'); return; }
     fetch('https://expense-tracker-7n2z.onrender.com/api/recurring', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
       body: JSON.stringify({ title: recTitle, amount: parseFloat(recAmount), category: recCategory, frequency: recFrequency, nextDate: recNextDate, notes: recNotes }),
     }).then(r => r.json()).then(() => {
       setRecTitle(''); setRecAmount(''); setRecNextDate(''); setRecNotes('');
+      setMessage('✅ Recurring expense added!');
+      setTimeout(() => setMessage(''), 3000);
       fetchRecurring();
-    });
+    }).catch(() => setMessage('❌ Failed to add recurring expense'));
   };
 
   const handleDeleteRecurring = (id: string) => {
