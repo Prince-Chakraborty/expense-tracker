@@ -119,6 +119,7 @@ export default function UserDashboard() {
     const mv = budgetMonth;
     const cv = budgetCategory;
     if (!lv) { setMessage('Please enter a monthly limit'); return; }
+    setLoading(true);
     fetch('https://expense-tracker-7n2z.onrender.com/api/budgets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
@@ -126,10 +127,11 @@ export default function UserDashboard() {
     }).then(r => r.json()).then(() => {
       setBudgetLimit('');
       setMessage('✅ Budget set successfully!');
+      setLoading(false);
       setTimeout(() => setMessage(''), 3000);
       fetch('https://expense-tracker-7n2z.onrender.com/api/budgets?month=' + mv, { headers: { Authorization: 'Bearer ' + getToken() } })
         .then(r => r.json()).then(d => setBudgets(d.budgets || []));
-    }).catch(() => setMessage('❌ Failed to set budget'));
+    }).catch(() => { setMessage('❌ Failed to set budget'); setLoading(false); });
   };
 
   const handleDeleteBudget = (id: string) => {
@@ -139,6 +141,7 @@ export default function UserDashboard() {
 
   const handleAddRecurring = () => {
     if (!recTitle || !recAmount || !recNextDate) { setMessage('Please fill all required fields'); return; }
+    setLoading(true);
     fetch('https://expense-tracker-7n2z.onrender.com/api/recurring', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + getToken() },
@@ -146,9 +149,10 @@ export default function UserDashboard() {
     }).then(r => r.json()).then(() => {
       setRecTitle(''); setRecAmount(''); setRecNextDate(''); setRecNotes('');
       setMessage('✅ Recurring expense added!');
+      setLoading(false);
       setTimeout(() => setMessage(''), 3000);
       fetchRecurring();
-    }).catch(() => setMessage('❌ Failed to add recurring expense'));
+    }).catch(() => { setMessage('❌ Failed to add recurring expense'); setLoading(false); });
   };
 
   const handleDeleteRecurring = (id: string) => {
@@ -347,7 +351,7 @@ export default function UserDashboard() {
                 {categories.map(cat => <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>)}
               </select>
               <input type="number" placeholder="Monthly Limit (Rs.)" value={budgetLimit} onChange={e => setBudgetLimit(e.target.value)} style={{ ...inputStyle, marginBottom: '20px' }} />
-              <button type="button" onClick={handleSetBudget} style={{ width: '100%', padding: '13px', background: 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: 'pointer' }}>Set Budget</button>
+              <button type="button" onClick={handleSetBudget} style={{ width: '100%', padding: '13px', background: loading ? '#999' : 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer' }}>{loading ? 'Setting...' : 'Set Budget ✓'}</button>
             </div>
             <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '15px', fontWeight: '600' }}>Budget Status</h3>
@@ -395,7 +399,7 @@ export default function UserDashboard() {
               </select>
               <input type="date" value={recNextDate} onChange={e => setRecNextDate(e.target.value)} style={inputStyle} />
               <input type="text" placeholder="Notes (optional)" value={recNotes} onChange={e => setRecNotes(e.target.value)} style={{ ...inputStyle, marginBottom: '20px' }} />
-              <button type="button" onClick={handleAddRecurring} style={{ width: '100%', padding: '13px', background: 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: 'pointer' }}>+ Add Recurring</button>
+              <button type="button" onClick={handleAddRecurring} style={{ width: '100%', padding: '13px', background: loading ? '#999' : 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer' }}>{loading ? 'Adding...' : '+ Add Recurring ✓'}</button>
             </div>
             <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '15px', fontWeight: '600' }}>Active Recurring Expenses</h3>
