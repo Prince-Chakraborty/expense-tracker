@@ -351,7 +351,7 @@ export default function UserDashboard() {
                 {categories.map(cat => <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>)}
               </select>
               <input type="number" placeholder="Monthly Limit (Rs.)" value={budgetLimit} onChange={e => setBudgetLimit(e.target.value)} style={{ ...inputStyle, marginBottom: '20px' }} />
-              <button type="button" onClick={handleSetBudget} style={{ width: '100%', padding: '13px', background: loading ? '#999' : 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer' }}>{loading ? 'Setting...' : 'Set Budget ✓'}</button>
+              <button type="button" onClick={handleSetBudget} style={{ width: '100%', padding: '13px', background: loading ? '#1a1a2e' : 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.2s', transform: loading ? 'scale(0.98)' : 'scale(1)' }}>{loading ? '⏳ Setting Budget...' : 'Set Budget'}</button>
             </div>
             <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '15px', fontWeight: '600' }}>Budget Status</h3>
@@ -399,7 +399,7 @@ export default function UserDashboard() {
               </select>
               <input type="date" value={recNextDate} onChange={e => setRecNextDate(e.target.value)} style={inputStyle} />
               <input type="text" placeholder="Notes (optional)" value={recNotes} onChange={e => setRecNotes(e.target.value)} style={{ ...inputStyle, marginBottom: '20px' }} />
-              <button type="button" onClick={handleAddRecurring} style={{ width: '100%', padding: '13px', background: loading ? '#999' : 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer' }}>{loading ? 'Adding...' : '+ Add Recurring ✓'}</button>
+              <button type="button" onClick={handleAddRecurring} style={{ width: '100%', padding: '13px', background: loading ? '#1a1a2e' : 'linear-gradient(135deg, #6c63ff, #8b85ff)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '15px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.2s', transform: loading ? 'scale(0.98)' : 'scale(1)' }}>{loading ? '⏳ Adding...' : '+ Add Recurring'}</button>
             </div>
             <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '15px', fontWeight: '600' }}>Active Recurring Expenses</h3>
