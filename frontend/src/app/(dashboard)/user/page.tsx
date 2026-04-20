@@ -339,6 +339,7 @@ export default function UserDashboard() {
         {activeTab === 'budget' && (
           <div style={{ maxWidth: '600px' }}>
             <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '24px' }}>Budget Tracker 🎯</h1>
+            {message && <div style={{ background: message.includes('✅') ? 'rgba(0,214,143,0.1)' : 'rgba(255,77,77,0.1)', border: '1px solid rgba(0,214,143,0.3)', borderRadius: '10px', padding: '12px', marginBottom: '20px', color: message.includes('✅') ? '#00d68f' : '#ff4d4d' }}>{message}</div>}
             <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '32px', marginBottom: '24px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '15px', fontWeight: '600' }}>Set Monthly Budget</h3>
               <input type="month" value={budgetMonth} onChange={e => setBudgetMonth(e.target.value)} style={inputStyle} />
@@ -377,7 +378,8 @@ export default function UserDashboard() {
 
         {activeTab === 'recurring' && (
           <div style={{ maxWidth: '600px' }}>
-            <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '24px' }}>Recurring Expenses ��</h1>
+            <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '24px' }}>Recurring Expenses 🔁</h1>
+            {message && <div style={{ background: message.includes('✅') ? 'rgba(0,214,143,0.1)' : 'rgba(255,77,77,0.1)', border: '1px solid rgba(0,214,143,0.3)', borderRadius: '10px', padding: '12px', marginBottom: '20px', color: message.includes('✅') ? '#00d68f' : '#ff4d4d' }}>{message}</div>}
             <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '32px', marginBottom: '24px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '15px', fontWeight: '600' }}>Add Recurring Expense</h3>
               <input type="text" placeholder="Title (e.g. Netflix, Rent)" value={recTitle} onChange={e => setRecTitle(e.target.value)} style={inputStyle} />
